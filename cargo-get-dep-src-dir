@@ -1,0 +1,5 @@
+#!/bin/bash
+
+dep="$1"
+dep_src=$(cargo metadata --format-version 1 | jq ".packages[] | select(.name == \"$dep\")" | jq ".targets[] | select(.name == \"$dep\")" | jq -r .src_path)
+dirname $(dirname "$dep_src")
